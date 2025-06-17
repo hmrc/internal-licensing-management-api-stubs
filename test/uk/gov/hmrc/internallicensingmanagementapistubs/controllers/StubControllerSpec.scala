@@ -34,23 +34,23 @@ class StubControllerSpec extends AnyWordSpec with Matchers with OptionValues wit
     with DefaultAwaitTimeout with FutureAwaits with GuiceOneAppPerSuite {
   implicit def mat: Materializer = app.injector.instanceOf[Materializer]
 
-  "GET" should {
+  "PUT" should {
     "return 200 when a file in resources" in {
-      val result = doGet("/customs/licence/GBOIL123457")
+      val result = doPut("/customs/licence/GBOIL123457")
       status(result) shouldBe Status.OK
     }
     "return 400 when a file in resources" in {
-      val result = doGet("/customs/licence/GBOIL123456")
+      val result = doPut("/customs/licence/GBOIL123456")
       status(result) shouldBe Status.BAD_REQUEST
     }
     "return 400 for no file found" in {
-      val result = doGet("/customs/licence/GBOIL000000")
+      val result = doPut("/customs/licence/GBOIL000000")
       status(result) shouldBe Status.BAD_REQUEST
     }
   }
 
-  def doGet(uri: String): Future[Result] = {
-    val fakeRequest = FakeRequest(GET, uri)
+  def doPut(uri: String): Future[Result] = {
+    val fakeRequest = FakeRequest(PUT, uri)
     route(app, fakeRequest).get
   }
 }
