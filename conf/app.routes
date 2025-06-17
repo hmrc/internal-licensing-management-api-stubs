@@ -1,3 +1,3 @@
 # microservice specific routes
 
-GET        /customs/licence/:ref             uk.gov.hmrc.internallicensingmanagementapistubs.controllers.StubController.stub(ref: String)
+PUT        /customs/licence/:ref             uk.gov.hmrc.internallicensingmanagementapistubs.controllers.StubController.stub(ref: String)
