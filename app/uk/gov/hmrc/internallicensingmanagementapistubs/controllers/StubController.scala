@@ -16,25 +16,32 @@
 
 package uk.gov.hmrc.internallicensingmanagementapistubs.controllers
 
+import java.io.FileNotFoundException
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
+import scala.io.Source
 
 import controllers.Assets
 
 import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, ControllerComponents, Result}
+import play.api.mvc.{Action, ControllerComponents}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
+import uk.gov.hmrc.internallicensingmanagementapistubs.connectors.ILMSConnector
+
+case class ILMSRequest(licenceRef: String)
+
+object ILMSRequest {
+  implicit val format = Json.format[ILMSRequest]
+}
+
 @Singleton()
-class StubController @Inject() (assets: Assets, cc: ControllerComponents)(implicit ec: ExecutionContext)
+class StubController @Inject() (assets: Assets, ilmsConnector: ILMSConnector, cc: ControllerComponents)(implicit ec: ExecutionContext)
     extends BackendController(cc) {
 
-  private val statuses: Map[String, Int] = List(
-    "GBOIL123456" -> 400
-  ).toMap
-
-  def stub(ref: String): Action[AnyContent] = Action.async { implicit request =>
-    val default  =
+  def stub(): Action[ILMSRequest] = Action.async(controllerComponents.parsers.json[ILMSRequest]) { implicit request =>
+    val ref     = request.body.licenceRef
+    val default =
       s"""{
          |  "correlationId": "123e4567-e89b-12d3-a456-426655440000",
          |  "sourceSystem": "CDS",
@@ -49,11 +56,13 @@ class StubController @Inject() (assets: Assets, cc: ControllerComponents)(implic
          |    }
          |  ]
          |}""".stripMargin
-    val fullPath = s"/stubs/"
-    val file     = s"$ref.json"
-    assets.at(fullPath, file)(request).map { result =>
-      if (result.header.status == 404) BadRequest(Json.parse(default))
-      else new Result(result.header.copy(status = statuses.getOrElse(ref, 200)), result.body)
-    }
+    val file    = s"stubs/$ref.json"
+    val result  =
+      try {
+        Ok(Json.parse(Source.fromResource(file).getLines().mkString))
+      } catch {
+        case _: FileNotFoundException => BadRequest(Json.parse(default))
+      }
+    ilmsConnector.postMessage(request.headers.get("x-client-id").getOrElse("")).map(_ => result)
   }
 }
