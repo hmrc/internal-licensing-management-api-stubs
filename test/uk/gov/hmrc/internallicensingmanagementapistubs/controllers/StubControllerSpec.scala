@@ -19,38 +19,59 @@ package uk.gov.hmrc.internallicensingmanagementapistubs.controllers
 import scala.concurrent.Future
 
 import org.apache.pekko.stream.Materializer
-import org.scalatest.OptionValues
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.play.WsScalaTestClient
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 
 import play.api.http.Status
+import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.libs.json.Json
 import play.api.mvc.Result
+import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import play.api.test.{DefaultAwaitTimeout, FakeRequest, FutureAwaits}
+import play.api.{Application, Configuration, Mode, inject}
+import uk.gov.hmrc.apiplatform.modules.common.utils.HmrcSpec
+import uk.gov.hmrc.http.HttpResponse
 
-class StubControllerSpec extends AnyWordSpec with Matchers with OptionValues with WsScalaTestClient
-    with DefaultAwaitTimeout with FutureAwaits with GuiceOneAppPerSuite {
+import uk.gov.hmrc.internallicensingmanagementapistubs.connectors.ILMSConnector
+
+class StubControllerSpec extends HmrcSpec with GuiceOneAppPerSuite {
+
+  private val stubConfig = Configuration(
+    "internal-licensing-management-api.bearerToken" -> "TESTTOKEN"
+  )
+
+  val connectorMock = mock[ILMSConnector]
+
+  override def fakeApplication(): Application =
+    GuiceApplicationBuilder()
+      .configure(stubConfig)
+      .bindings(inject.bind(classOf[ILMSConnector]).to(connectorMock))
+      .in(Mode.Test)
+      .build()
+
   implicit def mat: Materializer = app.injector.instanceOf[Materializer]
 
   "PUT" should {
     "return 200 when a file in resources" in {
-      val result = doPut("/customs/licence/GBOIL123457")
+      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      val result = doPut("/cds/lic01/v1", "GBOIL123457")
       status(result) shouldBe Status.OK
     }
+
     "return 400 when a file in resources" in {
-      val result = doPut("/customs/licence/GBOIL123456")
+      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      val result = doPut("/cds/lic01/v1", "GBOIL123456")
       status(result) shouldBe Status.BAD_REQUEST
     }
+
     "return 400 for no file found" in {
-      val result = doPut("/customs/licence/GBOIL000000")
+      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      val result = doPut("/cds/lic01/v1", "GBOIL000000")
       status(result) shouldBe Status.BAD_REQUEST
     }
   }
 
-  def doPut(uri: String): Future[Result] = {
-    val fakeRequest = FakeRequest(PUT, uri)
+  def doPut(uri: String, ref: String): Future[Result] = {
+    val fakeRequest = FakeRequest(PUT, uri).withBody(Json.parse(s"""{"licenceRef":"$ref"}"""))
     route(app, fakeRequest).get
   }
 }
