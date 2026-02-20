@@ -21,6 +21,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
 
 import play.api.http.HeaderNames
+import play.api.libs.json.Json
 import uk.gov.hmrc.http.HttpReads.Implicits._
 import uk.gov.hmrc.http._
 import uk.gov.hmrc.http.client.HttpClientV2
@@ -30,7 +31,7 @@ class ILMSConnector @Inject() (http: HttpClientV2, config: ILMSConfig)(implicit 
 
   def sendMessage(clientId: String)(implicit hc: HeaderCarrier): Future[HttpResponse] =
     http.put(url"${config.baseUrl}/mdtp/licence/notifyUsage")
-      .withBody(Source.fromResource("payload/default.json").getLines().mkString)
+      .withBody(Json.parse(Source.fromResource("payload/default.json").getLines().mkString))
       .setHeader(
         "x-client-id"             -> clientId,
         HeaderNames.AUTHORIZATION -> s"Bearer ${config.bearerToken}"
