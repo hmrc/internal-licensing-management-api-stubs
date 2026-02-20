@@ -66,6 +66,7 @@ trait BaseConnectorIntegrationSpec
 
   def stubPut(path: String, status: Int = OK) = stubFor(
     put(urlEqualTo(s"$path"))
+      .withHeader("content-type", equalTo("application/json"))
       .willReturn(
         aResponse()
           .withStatus(status)
