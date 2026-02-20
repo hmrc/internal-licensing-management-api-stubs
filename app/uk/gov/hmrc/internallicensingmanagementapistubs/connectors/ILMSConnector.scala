@@ -28,8 +28,8 @@ import uk.gov.hmrc.http.client.HttpClientV2
 @Singleton
 class ILMSConnector @Inject() (http: HttpClientV2, config: ILMSConfig)(implicit ec: ExecutionContext) {
 
-  def postMessage(clientId: String)(implicit hc: HeaderCarrier): Future[HttpResponse] =
-    http.post(url"${config.baseUrl}/mdtp/licence/notifyUsage")
+  def sendMessage(clientId: String)(implicit hc: HeaderCarrier): Future[HttpResponse] =
+    http.put(url"${config.baseUrl}/mdtp/licence/notifyUsage")
       .withBody(Source.fromResource("payload/default.json").getLines().mkString)
       .setHeader(
         "x-client-id"             -> clientId,

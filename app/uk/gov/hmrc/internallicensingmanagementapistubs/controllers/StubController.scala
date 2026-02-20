@@ -63,6 +63,6 @@ class StubController @Inject() (assets: Assets, ilmsConnector: ILMSConnector, cc
       } catch {
         case _: FileNotFoundException => BadRequest(Json.parse(default))
       }
-    ilmsConnector.postMessage(request.headers.get("x-client-id").getOrElse("")).map(_ => result)
+    ilmsConnector.sendMessage(request.headers.get("x-client-id").getOrElse("")).map(_ => result)
   }
 }

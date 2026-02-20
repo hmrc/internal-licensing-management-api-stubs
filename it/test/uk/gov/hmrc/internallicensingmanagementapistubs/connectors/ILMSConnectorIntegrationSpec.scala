@@ -41,14 +41,14 @@ class ILMSConnectorIntegrationSpec extends BaseConnectorIntegrationSpec with Gui
   val clientId                   = "123-456-789"
   "send" should {
     "pass back a success" in {
-      stubPost("/mdtp/licence/notifyUsage")
-      val result = await(underTest.postMessage(clientId))
+      stubPut("/mdtp/licence/notifyUsage")
+      val result = await(underTest.sendMessage(clientId))
       result.status shouldBe Status.OK
     }
 
     "pass back an error" in {
-      stubPost("/mdtp/licence/notifyUsage", Status.BAD_REQUEST)
-      val result = await(underTest.postMessage(clientId))
+      stubPut("/mdtp/licence/notifyUsage", Status.BAD_REQUEST)
+      val result = await(underTest.sendMessage(clientId))
       result.status shouldBe Status.BAD_REQUEST
     }
   }

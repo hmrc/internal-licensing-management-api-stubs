@@ -52,19 +52,19 @@ class StubControllerSpec extends HmrcSpec with GuiceOneAppPerSuite {
 
   "PUT" should {
     "return 200 when a file in resources" in {
-      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL123457")
       status(result) shouldBe Status.OK
     }
 
     "return 400 when a file in resources" in {
-      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL123456")
       status(result) shouldBe Status.BAD_REQUEST
     }
 
     "return 400 for no file found" in {
-      when(connectorMock.postMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL000000")
       status(result) shouldBe Status.BAD_REQUEST
     }
