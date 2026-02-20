@@ -64,8 +64,8 @@ trait BaseConnectorIntegrationSpec
     super.afterEach()
   }
 
-  def stubPost(path: String, status: Int = OK) = stubFor(
-    post(urlEqualTo(s"$path"))
+  def stubPut(path: String, status: Int = OK) = stubFor(
+    put(urlEqualTo(s"$path"))
       .willReturn(
         aResponse()
           .withStatus(status)
