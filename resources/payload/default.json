@@ -1,26 +1,28 @@
 {
-  "correlationId" : "16153387-9084-45f8-80d5-a8a7c0a250dd",
-  "sourceSystem" : "CDS",
-  "destinationSystem" : "ILBDOTI",
-  "licenceRef" : "1",
-  "licenceStatus" : "O",
-  "creationDateTime" : "2026-01-26T16:57:21Z",
-  "controlDate" : "2017-07-26T15:21:27Z",
-  "declarationMRN" : "1",
-  "declarationUCR" : "reference",
-  "movementType" : "E",
-  "traderId" : "001",
-  "licenceLine" : [ {
-    "lineNumber" : 1,
-    "totalQuantityUsed" : 466.0,
-    "usage" : {
-      "usageType" : "O",
-      "quantityUsed" : 233.0,
-      "unitOfQuantity" : "KGM",
-      "countryOfOrigin" : "US",
-      "countryOfConsignment" : "US",
-      "countryOfDestination" : "NL"
+  "correlationId": "16153387-9084-45f8-80d5-a8a7c0a250dd",
+  "sourceSystem": "CDS",
+  "destinationSystem": "ILBDOTI",
+  "licenceRef": "1",
+  "licenceStatus": "O",
+  "creationDateTime": "2026-01-26T16:57:21Z",
+  "controlDate": "2017-07-26T15:21:27Z",
+  "declarationMRN": "1",
+  "declarationUCR": "reference",
+  "movementType": "E",
+  "traderId": "001",
+  "licenceLine": [
+    {
+      "lineNumber": 1,
+      "totalQuantityUsed": 466.0,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 233.0,
+        "unitOfQuantity": "KGM",
+        "countryOfOrigin": "US",
+        "countryOfConsignment": "US",
+        "countryOfDestination": "NL"
+      }
     }
-  } ],
-  "isNI" : false
+  ],
+  "isNI": false
 }

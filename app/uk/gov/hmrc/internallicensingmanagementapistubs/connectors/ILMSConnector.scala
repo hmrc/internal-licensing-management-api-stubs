@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.internallicensingmanagementapistubs.connectors
 
+import java.io.FileNotFoundException
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 import scala.io.Source
@@ -29,14 +30,21 @@ import uk.gov.hmrc.http.client.HttpClientV2
 @Singleton
 class ILMSConnector @Inject() (http: HttpClientV2, config: ILMSConfig)(implicit ec: ExecutionContext) {
 
-  def sendMessage(clientId: String)(implicit hc: HeaderCarrier): Future[HttpResponse] =
+  def sendMessage(clientId: String, reference: String)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
+    val body =
+      try {
+        Source.fromResource(s"payload/${reference}.json").getLines().mkString
+      } catch {
+        case e: FileNotFoundException => Source.fromResource("payload/default.json").getLines().mkString
+      }
     http.put(url"${config.baseUrl}/mdtp/licence/notifyUsage")
-      .withBody(Json.parse(Source.fromResource("payload/default.json").getLines().mkString))
+      .withBody(Json.parse(body))
       .setHeader(
         "x-client-id"             -> clientId,
         HeaderNames.AUTHORIZATION -> s"Bearer ${config.bearerToken}"
       )
       .execute[HttpResponse]
+  }
 
 }
 case class ILMSConfig(baseUrl: String, bearerToken: String)

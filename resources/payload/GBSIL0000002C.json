@@ -1,0 +1,112 @@
+{
+  "correlationId": "f5d9f32b-75fe-46ba-b7ec-7f92634ffa25",
+  "sourceSystem": "CDS",
+  "destinationSystem": "ILBDOTI",
+  "licenceRef": "GBSIL0000002C",
+  "licenceStatus": "O",
+  "creationDateTime": "2026-03-10T11:01:27Z",
+  "controlDate": "2026-03-10T10:57:40Z",
+  "declarationMRN": "26GB2PTFNL8M9EYAR5",
+  "declarationUCR": "26GB2PTFNL8M9EYAR5",
+  "movementType": "I",
+  "traderId": "XI417869120000",
+  "licenceLine": [
+    {
+      "lineNumber": 5,
+      "totalQuantityUsed": 40,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 40,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 4,
+      "totalQuantityUsed": 30,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 30,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 3,
+      "totalQuantityUsed": 20,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 20,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 2,
+      "totalQuantityUsed": 10,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 10,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 1,
+      "totalQuantityUsed": 50,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 50,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 8,
+      "totalQuantityUsed": 80,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 80,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 6,
+      "totalQuantityUsed": 60,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 60,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 7,
+      "totalQuantityUsed": 70,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 70,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "DE",
+        "countryOfConsignment": "DE",
+        "countryOfDestination": "GB"
+      }
+    }
+  ],
+  "isNI": false
+}

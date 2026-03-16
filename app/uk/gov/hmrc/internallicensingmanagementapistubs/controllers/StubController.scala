@@ -59,10 +59,16 @@ class StubController @Inject() (assets: Assets, ilmsConnector: ILMSConnector, cc
     val file    = s"stubs/$ref.json"
     val result  =
       try {
-        Ok(Json.parse(Source.fromResource(file).getLines().mkString))
+        val body = Json.parse(Source.fromResource(file).getLines().mkString)
+
+        ref match {
+          case "GBSIL0000005F"                                     => Forbidden(body)
+          case "GBSIL0000003D" | "GBSIL0000002C" | "GBSIL0000001B" => Created(body)
+          case _                                                   => Ok(body)
+        }
       } catch {
         case _: FileNotFoundException => BadRequest(Json.parse(default))
       }
-    ilmsConnector.sendMessage(request.headers.get("x-client-id").getOrElse("")).map(_ => result)
+    ilmsConnector.sendMessage(request.headers.get("x-client-id").getOrElse(""), ref).map(_ => result)
   }
 }
