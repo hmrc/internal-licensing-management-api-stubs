@@ -52,19 +52,31 @@ class StubControllerSpec extends HmrcSpec with GuiceOneAppPerSuite {
 
   "PUT" should {
     "return 200 when a file in resources" in {
-      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*, *)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL123457")
       status(result) shouldBe Status.OK
     }
 
+    "return 201 when a file in resources" in {
+      when(connectorMock.sendMessage(*, *)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      val result = doPut("/cds/lic01/v1", "GBSIL0000003D")
+      status(result) shouldBe Status.CREATED
+    }
+
     "return 400 when a file in resources" in {
-      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*, *)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL123456")
       status(result) shouldBe Status.BAD_REQUEST
     }
 
+    "return 403 when a file in resources" in {
+      when(connectorMock.sendMessage(*, *)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      val result = doPut("/cds/lic01/v1", "GBSIL0000005F")
+      status(result) shouldBe Status.FORBIDDEN
+    }
+
     "return 400 for no file found" in {
-      when(connectorMock.sendMessage(*)(*)).thenReturn(Future.successful(HttpResponse(200)))
+      when(connectorMock.sendMessage(*, *)(*)).thenReturn(Future.successful(HttpResponse(200)))
       val result = doPut("/cds/lic01/v1", "GBOIL000000")
       status(result) shouldBe Status.BAD_REQUEST
     }

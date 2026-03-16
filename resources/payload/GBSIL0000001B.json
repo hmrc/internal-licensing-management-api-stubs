@@ -1,0 +1,28 @@
+{
+  "correlationId": "297db32a-3624-4248-b1ea-c5879bc8a542",
+  "sourceSystem": "CDS",
+  "destinationSystem": "ILBDOTI",
+  "licenceRef": "GBSIL0000001B",
+  "licenceStatus": "O",
+  "creationDateTime": "2026-03-09T16:57:31Z",
+  "controlDate": "2026-03-09T16:55:13Z",
+  "declarationMRN": "26GB2OQRMUQH2IXAR7",
+  "declarationUCR": "26GB2OQRMUQH2IXAR7",
+  "movementType": "I",
+  "traderId": "GB417869120000",
+  "licenceLine": [
+    {
+      "lineNumber": 1,
+      "totalQuantityUsed": 50,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 50,
+        "unitOfQuantity": "KGM",
+        "countryOfOrigin": "ES",
+        "countryOfConsignment": "ES",
+        "countryOfDestination": "GB"
+      }
+    }
+  ],
+  "isNI": false
+}

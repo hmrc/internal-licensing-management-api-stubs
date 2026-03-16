@@ -1,0 +1,52 @@
+{
+  "correlationId": "79e7440e-cc9f-4673-abad-bcdb2eaf4438",
+  "sourceSystem": "CDS",
+  "destinationSystem": "ILBDOTI",
+  "licenceRef": "GBSAN0000006G",
+  "licenceStatus": "O",
+  "creationDateTime": "2026-03-10T12:13:56Z",
+  "controlDate": "2026-03-10T12:07:07Z",
+  "declarationMRN": "26GB2PVWW0TPIZGAR1",
+  "declarationUCR": "26GB2PVWW0TPIZGAR1",
+  "movementType": "I",
+  "traderId": "GB417869120000",
+  "licenceLine": [
+    {
+      "lineNumber": 1,
+      "totalQuantityUsed": 500,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 500,
+        "unitOfQuantity": "KGM",
+        "countryOfOrigin": "RU",
+        "countryOfConsignment": "RU",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 3,
+      "totalQuantityUsed": 20,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 20,
+        "unitOfQuantity": "NPR",
+        "countryOfOrigin": "RU",
+        "countryOfConsignment": "RU",
+        "countryOfDestination": "GB"
+      }
+    },
+    {
+      "lineNumber": 2,
+      "totalQuantityUsed": 100,
+      "usage": {
+        "usageType": "O",
+        "quantityUsed": 100,
+        "unitOfQuantity": "NAR",
+        "countryOfOrigin": "RU",
+        "countryOfConsignment": "RU",
+        "countryOfDestination": "GB"
+      }
+    }
+  ],
+  "isNI": false
+}
