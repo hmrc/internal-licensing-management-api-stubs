@@ -23,7 +23,7 @@ import scala.io.Source
 
 import controllers.Assets
 
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 import play.api.mvc.{Action, ControllerComponents}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
@@ -32,7 +32,7 @@ import uk.gov.hmrc.internallicensingmanagementapistubs.connectors.ILMSConnector
 case class ILMSRequest(licenceRef: String)
 
 object ILMSRequest {
-  implicit val format = Json.format[ILMSRequest]
+  implicit val format: OFormat[ILMSRequest] = Json.format[ILMSRequest]
 }
 
 @Singleton()
